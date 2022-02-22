@@ -22,12 +22,14 @@ export const request = new Request()
 
 // 请求准备阶段 回调
 request.onPreRequest = (option) => {
+  log.warn('请求准备阶段 回调', {  option })
   option.mock = true // 全局控制是否开启 mock， 必须在 ovine cli --mock 选项开启的情况下，才有效
   return option
 }
 
 // 请求发送前 回调
 request.onRequest = (option) => {
+  log.warn('请求发送前 回调', {  option })
   const { key, token } = getStore(storeKeys.auth) || {}
   const { actionAddr } = option
 
@@ -39,7 +41,7 @@ request.onRequest = (option) => {
     option.headers[key] = token
   }
 
-  // 操作地址
+  // // 操作地址
   if (actionAddr) {
     option.headers['X-ACTION-ADDR'] = actionAddr
   }
@@ -49,6 +51,7 @@ request.onRequest = (option) => {
 
 // 接收到请求正常结果 回调
 request.onSuccess = (source, option) => {
+  log.warn('接收到请求正常结果 回调', {  option })
   const { code = 0, msg, message } = source
   const { api } = option
 

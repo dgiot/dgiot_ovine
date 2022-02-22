@@ -34,9 +34,17 @@ export const schema = {
   preset: {
     apis: {
       login: {
-        url: 'POST ovapi/user/login',
+        url: 'POST iotapi/login',
+        headers: {
+          accept: 'application/json',
+          'Content-Type': 'text/plain',
+        },
         onError: () => {
           publish(msgKeys.updateAuthLoginCode, '')
+        },
+        body: {
+          username: 'dgiot_dev',
+          password: 'dgiot_dev'
         },
         onSuccess: (source) => {
           const { code, msg, data } = source

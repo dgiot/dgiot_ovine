@@ -10,14 +10,14 @@ export const env = {
   default: {
     disableLimit: false,
     domains: {
-      api: 'https://ovine.igroupes.com', // ovine api 地址
+      api: 'https://dev.iotn2n.com', // ovine api 地址
     },
   },
   // 本地开发
   localhost: {
     disableLimit: false,
     domains: {
-      api: 'https://ovine.igroupes.com',
+      api: 'https://dev.iotn2n.com',
     },
     // 日志配置
     logger: {
@@ -28,14 +28,14 @@ export const env = {
   // 测试环境
   staging: {
     domains: {
-      api: 'https://ovine.igroupes.com',
+      api: 'https://dev.iotn2n.com',
     },
   },
   // 生产环境
   production: {
     isProd: true, // 标示是生产环境
     domains: {
-      api: 'https://ovine.igroupes.com',
+      api: 'https://dev.iotn2n.com',
     },
   },
 }

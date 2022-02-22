@@ -12,7 +12,7 @@ import { msgKeys } from '~/app/constants'
 import { request } from '~/app/request'
 
 const { url: src } = request.getUrlByOption({
-  url: 'ovapi/user/code',
+  url: 'https://ovine.igroupes.com/ovapi/user/code',
 })
 
 export default () => {

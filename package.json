@@ -7,8 +7,10 @@
   "private": false,
   "homepage": "https://github.com/dgiot/dgiot_ovine.git",
   "scripts": {
-    "start": "ovine dev --mock",
-    "dev": "ovine dev --no-dll --mock",
+    "start": "ovine dev",
+    "mock": "ovine dev --mock",
+    "dev": "ovine dev",
+    "mock:no-dll": "ovine dev --no-dll --mock",
     "build": "yarn eslint && ovine build",
     "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit",
     "scss": "ovine scss",
