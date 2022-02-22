@@ -1,0 +1,48 @@
+name: deploy
+on:
+  push:
+    branches: [ master,dev ]
+  workflow_dispatch:
+
+# 设置上海时区
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['16']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }} 🚀
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Cache Node Dependencies 🚀
+        id: cache
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-
+      - name: yarn script 🚀
+        run: |
+          yarn fix-memory-limit
+          yarn install
+          yarn build
+          cp -r README.md LICENSE dist
+      - name: Deploy to github gh-pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
+      - name: Upload Ovine 🚀
+        uses: actions/upload-artifact@v2
+        with:
+          name: ovine
+          path: dist
